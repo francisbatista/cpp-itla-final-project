@@ -33,10 +33,13 @@ int main()
             break;
         }
     }
+    vector<string> materias(0);
+    vector<int> calificaciones(0);
+    vector<string> materiasReprobadas(0);
+    vector<int> calificacionesReprobadas(0);
+    float promedioCalificaciones = 0.0;
     if (l != 4)
     {
-        vector<string> materias(0);
-        vector<int> calificaciones(0);
         bool keepInLoop = true;
         string userChoise, materia;
         while (keepInLoop)
@@ -117,6 +120,22 @@ int main()
             }
         }
     }
+    int sumaCalificaciones = 0;
+    for(size_t i = 0; i < calificaciones.size(); i++) {
+        if(calificaciones[i] < 70) {
+            materiasReprobadas.push_back(materias[i]);
+            calificacionesReprobadas.push_back(calificaciones[i]);
+        }
+        sumaCalificaciones += calificaciones[i];
+    }
+    promedioCalificaciones = sumaCalificaciones / stof(to_string(calificaciones.size()));
+    cout << "Materias reprobadas: " << endl;
+    for(size_t i = 0; i < materiasReprobadas.size(); i++) {
+        cout << materiasReprobadas[i] << ": " << calificacionesReprobadas[i] << endl;
+    }
+    cout << "Promedio de calificaciones: ";
+    printf("%.2f", promedioCalificaciones);
+    cout << endl;
     system("pause");
     return 0;
 }
